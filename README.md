@@ -2,6 +2,8 @@
 
 A simple CLI tool that converts natural language into shell commands using AI.
 
+![Demo](demo.gif)
+
 ## Features
 
 - Convert English descriptions into executable shell commands

@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  demo:
+    build:
+      context: .
+      dockerfile: Dockerfile.demo
+    container_name: lts-demo
+    volumes:
+      - ./demo-output:/demo/output
+    environment:
+      - VHS_NO_SANDBOX=1
+    command: sh -c "vhs demo.tape && cp demo.gif output/"

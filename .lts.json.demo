@@ -1,0 +1,7 @@
+{
+  "provider": "test",
+  "test": {
+    "seconds": 1,
+    "text": "find . -maxdepth 1 -name \"*.pdf\""
+  }
+}
