@@ -1,21 +1,20 @@
 package config
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
-
-	"gopkg.in/yaml.v3"
 )
 
 type Config struct {
-	LLMProvider  string        `yaml:"llm_provider"`
-	OllamaConfig *OllamaConfig `yaml:"ollama,omitempty"`
+	LLMProvider  string        `json:"llm_provider"`
+	OllamaConfig *OllamaConfig `json:"ollama,omitempty"`
 }
 
 type OllamaConfig struct {
-	URL   string `yaml:"url"`
-	Model string `yaml:"model"`
+	URL   string `json:"url"`
+	Model string `json:"model"`
 }
 
 func Load() (*Config, error) {
@@ -24,14 +23,14 @@ func Load() (*Config, error) {
 		return nil, fmt.Errorf("failed to get home directory: %w", err)
 	}
 
-	configPath := filepath.Join(homeDir, ".lts.yaml")
+	configPath := filepath.Join(homeDir, ".lts.json")
 	data, err := os.ReadFile(configPath)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read config file %s: %w", configPath, err)
 	}
 
 	var cfg Config
-	if err := yaml.Unmarshal(data, &cfg); err != nil {
+	if err := json.Unmarshal(data, &cfg); err != nil {
 		return nil, fmt.Errorf("failed to parse config file: %w", err)
 	}
 
