@@ -96,7 +96,3 @@ lts completion fish > ~/.config/fish/completions/lts.fish
 # PowerShell
 lts completion powershell > lts.ps1
 ```
-
-## License
-
-MIT
