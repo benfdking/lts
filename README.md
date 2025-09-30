@@ -12,6 +12,14 @@ A simple CLI tool that converts natural language into shell commands using AI.
 
 ## Installation
 
+### Quick Install (All Platforms)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/benfdking/lts/main/install.sh | sh
+```
+
+This script automatically detects your OS and architecture, then downloads and installs the appropriate binary.
+
 ### Homebrew (macOS/Linux)
 
 ```bash
