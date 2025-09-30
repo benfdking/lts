@@ -60,3 +60,17 @@ release:
   github:
     owner: benfdking
     name: lts
+
+# Universal installation script
+announce:
+  skip: false
+
+# Generate install script
+blobs:
+  - provider: s3
+    bucket: "{{ .Env.AWS_BUCKET }}"
+    folder: "{{ .ProjectName }}/{{ .Version }}"
+
+# Alternative: Include install.sh in release assets
+extra_files:
+  - glob: ./install.sh
