@@ -5,7 +5,7 @@ A simple CLI tool that converts natural language into shell commands using AI.
 ## Features
 
 - Convert English descriptions into executable shell commands
-- Support for multiple LLM providers (Claude, Ollama)
+- Support for multiple LLM providers (Claude, OpenAI, Ollama)
 - Built with Go using Cobra for a robust CLI experience
 - Shell autocompletion support (bash, zsh, fish, powershell)
 - Cross-platform releases (Linux, macOS, Windows)
@@ -46,6 +46,19 @@ Create a configuration file at `~/.lts.json`:
 Set your API key:
 ```bash
 export ANTHROPIC_API_KEY=your_key_here
+```
+
+### OpenAI
+
+```json
+{
+  "llm_provider": "openai"
+}
+```
+
+Set your API key:
+```bash
+export OPENAI_API_KEY=your_key_here
 ```
 
 ### Ollama (Local LLM)

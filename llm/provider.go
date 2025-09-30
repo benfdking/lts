@@ -14,6 +14,8 @@ func NewProvider(cfg *config.Config) (Provider, error) {
 	switch cfg.LLMProvider {
 	case "claude-code":
 		return &ClaudeCodeProvider{}, nil
+	case "openai":
+		return &OpenAIProvider{}, nil
 	case "ollama":
 		provider := &OllamaProvider{}
 		if cfg.OllamaConfig != nil {
