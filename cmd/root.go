@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/benfdking/lts/config"
@@ -28,8 +29,12 @@ var rootCmd = &cobra.Command{
 			return fmt.Errorf("failed to create LLM provider: %w", err)
 		}
 
-		// Join all args into a single prompt
-		prompt := strings.Join(args, " ")
+		// Detect shell type
+		shellType := detectShell()
+
+		// Join all args into a single prompt and inject shell type
+		userPrompt := strings.Join(args, " ")
+		prompt := fmt.Sprintf("Generate a command for %s shell: %s", shellType, userPrompt)
 
 		// Translate to CLI command
 		command, err := provider.Translate(prompt)
@@ -42,6 +47,29 @@ var rootCmd = &cobra.Command{
 
 		return nil
 	},
+}
+
+func detectShell() string {
+	// Check SHELL environment variable first
+	shell := os.Getenv("SHELL")
+	if shell != "" {
+		// Extract just the shell name (e.g., /bin/bash -> bash)
+		return filepath.Base(shell)
+	}
+
+	// Fallback to checking common shell-specific variables
+	if os.Getenv("ZSH_VERSION") != "" {
+		return "zsh"
+	}
+	if os.Getenv("BASH_VERSION") != "" {
+		return "bash"
+	}
+	if os.Getenv("FISH_VERSION") != "" {
+		return "fish"
+	}
+
+	// Default fallback
+	return "bash"
 }
 
 func Execute() {
