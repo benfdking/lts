@@ -9,7 +9,13 @@ import (
 )
 
 type Config struct {
-	LLMProvider string `yaml:"llm_provider"`
+	LLMProvider  string        `yaml:"llm_provider"`
+	OllamaConfig *OllamaConfig `yaml:"ollama,omitempty"`
+}
+
+type OllamaConfig struct {
+	URL   string `yaml:"url"`
+	Model string `yaml:"model"`
 }
 
 func Load() (*Config, error) {

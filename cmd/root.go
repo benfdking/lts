@@ -23,7 +23,7 @@ var rootCmd = &cobra.Command{
 		}
 
 		// Create LLM provider
-		provider, err := llm.NewProvider(cfg.LLMProvider)
+		provider, err := llm.NewProvider(cfg)
 		if err != nil {
 			return fmt.Errorf("failed to create LLM provider: %w", err)
 		}
