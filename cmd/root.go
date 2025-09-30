@@ -19,7 +19,10 @@ var rootCmd = &cobra.Command{
 		// Load config
 		cfg, err := config.Load()
 		if err != nil {
-			return fmt.Errorf("failed to load config: %w", err)
+			fmt.Fprintf(os.Stderr, "Error: %v\n\n", err)
+			fmt.Fprintf(os.Stderr, "It looks like you haven't set up LTS yet.\n")
+			fmt.Fprintf(os.Stderr, "Run 'lts init' to create your configuration file.\n")
+			os.Exit(1)
 		}
 
 		// Create LLM provider
