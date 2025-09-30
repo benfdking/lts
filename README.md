@@ -33,17 +33,31 @@ go build -o lts
 
 ## Configuration
 
-Create a configuration file at `~/.lts.yaml`:
+Create a configuration file at `~/.lts.json`:
 
 ### Claude (Anthropic API)
 
-```yaml
-llm_provider: claude-code
+```json
+{
+  "llm_provider": "claude-code"
+}
 ```
 
 Set your API key:
 ```bash
 export ANTHROPIC_API_KEY=your_key_here
+```
+
+### Ollama (Local LLM)
+
+```json
+{
+  "llm_provider": "ollama",
+  "ollama": {
+    "url": "http://localhost:11434",
+    "model": "llama3.2"
+  }
+}
 ```
 
 ## Usage
