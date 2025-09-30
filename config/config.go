@@ -7,16 +7,19 @@ import (
 	"path/filepath"
 )
 
+// Config for lts. The general structure of it is the provider which matches
+// the then following name of the corresponding config block.
 type Config struct {
-	LLMProvider  string        `json:"llm_provider"`
-	OllamaConfig *OllamaConfig `json:"ollama,omitempty"`
+	Provider string  `json:"provider"`
+	Ollama   *Ollama `json:"ollama,omitempty"`
 }
 
-type OllamaConfig struct {
+type Ollama struct {
 	URL   string `json:"url"`
 	Model string `json:"model"`
 }
 
+// Load the config from the dotfile location.
 func Load() (*Config, error) {
 	homeDir, err := os.UserHomeDir()
 	if err != nil {

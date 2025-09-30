@@ -11,7 +11,7 @@ type Provider interface {
 }
 
 func NewProvider(cfg *config.Config) (Provider, error) {
-	switch cfg.LLMProvider {
+	switch cfg.Provider {
 	case "claude-code":
 		return &ClaudeCodeProvider{}, nil
 	case "anthropic":
@@ -20,12 +20,12 @@ func NewProvider(cfg *config.Config) (Provider, error) {
 		return &OpenAIProvider{}, nil
 	case "ollama":
 		provider := &OllamaProvider{}
-		if cfg.OllamaConfig != nil {
-			provider.URL = cfg.OllamaConfig.URL
-			provider.Model = cfg.OllamaConfig.Model
+		if cfg.Ollama != nil {
+			provider.URL = cfg.Ollama.URL
+			provider.Model = cfg.Ollama.Model
 		}
 		return provider, nil
 	default:
-		return nil, fmt.Errorf("unsupported LLM provider: %s", cfg.LLMProvider)
+		return nil, fmt.Errorf("unsupported LLM provider: %s", cfg.Provider)
 	}
 }
