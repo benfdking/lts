@@ -36,6 +36,19 @@ changelog:
       - '^docs:'
       - '^test:'
 
+brews:
+  - name: lts
+    repository:
+      owner: benfdking
+      name: lts
+      token: "{{ .Env.GITHUB_TOKEN }}"
+    folder: Formula
+    homepage: "https://github.com/benfdking/lts"
+    description: "Convert natural language to shell commands using AI"
+    license: "MIT"
+    install: |
+      bin.install "lts"
+
 release:
   github:
     owner: benfdking
