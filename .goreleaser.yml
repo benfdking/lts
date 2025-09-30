@@ -16,6 +16,11 @@ builds:
       - arm64
     binary: lts
     main: ./main.go
+    ldflags:
+      - -s -w
+      - -X main.version={{.Version}}
+    flags:
+      - -trimpath
 
 archives:
   - format: tar.gz
