@@ -12,6 +12,13 @@ A simple CLI tool that converts natural language into shell commands using AI.
 
 ## Installation
 
+### Homebrew (macOS/Linux)
+
+```bash
+brew tap benfdking/lts
+brew install lts
+```
+
 ### Download pre-built binaries
 
 Download the latest release from the [releases page](https://github.com/benfdking/lts/releases).
