@@ -43,26 +43,26 @@
 Output demo.gif
 
 Set FontSize 18
-Set Width 1200
-Set Height 600
+Set Width 1400
+Set Height 700
 Set Padding 20
 Set Theme "Catppuccin Mocha"
 
 Type "# LTS - Language To Shell" Sleep 1s Enter
-Type "# Convert natural language to shell commands" Sleep 1s Enter
+Type "# Convert natural language to shell commands using AI" Sleep 1s Enter
 Sleep 1s
 
 Type "lts list all pdf files in the current directory" Sleep 500ms Enter
-Sleep 2s
+Sleep 4s
 
 Type "lts find all go files modified in the last 7 days" Sleep 500ms Enter
-Sleep 2s
+Sleep 4s
 
 Type "lts show me disk usage sorted by size" Sleep 500ms Enter
-Sleep 2s
+Sleep 4s
 
-Type "lts add all files to git and commit with message 'update'" Sleep 500ms Enter
-Sleep 2s
+Type "lts count how many lines of code in all go files" Sleep 500ms Enter
+Sleep 4s
 
 Type "# Works with any shell command!" Sleep 1s Enter
 Sleep 2s
