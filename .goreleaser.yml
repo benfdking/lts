@@ -42,7 +42,7 @@ brews:
       owner: benfdking
       name: lts
       token: "{{ .Env.GITHUB_TOKEN }}"
-    folder: Formula
+    directory: Formula
     homepage: "https://github.com/benfdking/lts"
     description: "Convert natural language to shell commands using AI"
     license: "MIT"
