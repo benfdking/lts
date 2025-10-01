@@ -18,7 +18,7 @@ func (c *ClaudeCodeProvider) Translate(prompt string) (string, error) {
 	fullPrompt := fmt.Sprintf("%s\n\nRequest: %s", systemPrompt, prompt)
 
 	// Use claude CLI which handles authentication automatically
-	cmd := exec.Command("claude", "--prompt", fullPrompt)
+	cmd := exec.Command("claude", fullPrompt)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		return "", fmt.Errorf("failed to run claude CLI: %w\nOutput: %s", err, string(output))
