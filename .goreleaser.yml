@@ -43,7 +43,7 @@ changelog:
       - '^docs:'
       - '^test:'
 
-homebrew:
+brews:
   - name: lts
     repository:
       owner: benfdking
@@ -60,6 +60,8 @@ release:
   github:
     owner: benfdking
     name: lts
+  extra_files:
+    - glob: ./install.sh
 
 # Universal installation script
 announce:
@@ -69,8 +71,4 @@ announce:
 blobs:
   - provider: s3
     bucket: "{{ .Env.AWS_BUCKET }}"
-    folder: "{{ .ProjectName }}/{{ .Version }}"
-
-# Alternative: Include install.sh in release assets
-extra_files:
-  - glob: ./install.sh
+    directory: "{{ .ProjectName }}/{{ .Version }}"
