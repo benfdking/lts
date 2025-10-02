@@ -9,7 +9,9 @@ import (
 	"os"
 )
 
-type OpenAIProvider struct{}
+type OpenAIProvider struct {
+	Model string
+}
 
 type openaiRequest struct {
 	Model    string          `json:"model"`
@@ -37,8 +39,13 @@ func (o *OpenAIProvider) Translate(prompt string) (string, error) {
 
 	systemPrompt := "You are a CLI command translator. Convert natural language requests into shell commands. Return ONLY the command, nothing else. No explanations, no markdown, just the raw command."
 
+	model := o.Model
+	if model == "" {
+		model = "gpt-4"
+	}
+
 	reqBody := openaiRequest{
-		Model: "gpt-4",
+		Model: model,
 		Messages: []openaiMessage{
 			{
 				Role:    "system",

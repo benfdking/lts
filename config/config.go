@@ -10,12 +10,22 @@ import (
 // Config for lts. The general structure of it is the provider which matches
 // the then following name of the corresponding config block.
 type Config struct {
-	Provider string  `json:"provider"`
-	Ollama   *Ollama `json:"ollama,omitempty"`
+	Provider  string     `json:"provider"`
+	Ollama    *Ollama    `json:"ollama,omitempty"`
+	Anthropic *Anthropic `json:"anthropic,omitempty"`
+	OpenAI    *OpenAI    `json:"openai,omitempty"`
 }
 
 type Ollama struct {
 	URL   string `json:"url"`
+	Model string `json:"model"`
+}
+
+type Anthropic struct {
+	Model string `json:"model"`
+}
+
+type OpenAI struct {
 	Model string `json:"model"`
 }
 
