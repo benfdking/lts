@@ -5,21 +5,21 @@
 class Lts < Formula
   desc "Convert natural language to shell commands using AI"
   homepage "https://github.com/benfdking/lts"
-  version "0.0.5"
+  version "0.0.8"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.5/lts_Darwin_x86_64.tar.gz"
-      sha256 "320698795201eaac24ee22d06e7ef2b42ae98ad6adc4d9233e93fed0a3691356"
+      url "https://github.com/benfdking/lts/releases/download/v0.0.8/lts_Darwin_x86_64.tar.gz"
+      sha256 "11d8f977b3836cf9980fc10c4967edf18d6bfe133d91ba4acfdfa1b722128914"
 
       def install
         bin.install "lts"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.5/lts_Darwin_arm64.tar.gz"
-      sha256 "5f006d83b69a81fe0ec7b90794d223f9848ee16e972d42b7c92e7324b9197880"
+      url "https://github.com/benfdking/lts/releases/download/v0.0.8/lts_Darwin_arm64.tar.gz"
+      sha256 "73b1e3769c68d1267b02d9a472c07e355cf933a60c91e0f66311fc50b9c93a50"
 
       def install
         bin.install "lts"
@@ -29,15 +29,15 @@ class Lts < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.5/lts_Linux_x86_64.tar.gz"
-      sha256 "8d0708dbb545b9865391ad7b0949dc854573ccd2a3221e8d300bf3dbe071ecfc"
+      url "https://github.com/benfdking/lts/releases/download/v0.0.8/lts_Linux_x86_64.tar.gz"
+      sha256 "97bb96715574ba30fd76f816e7b0a43b39d16919b6468ca9d7bae177440c62f8"
       def install
         bin.install "lts"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.5/lts_Linux_arm64.tar.gz"
-      sha256 "74ace2f8e06fa5b7bf35903480b9416853b2f4be1c0ab6002266b28221e975c6"
+      url "https://github.com/benfdking/lts/releases/download/v0.0.8/lts_Linux_arm64.tar.gz"
+      sha256 "951c9030aadc30d512b978bfcced02bed6df1fb8e223cb175d36aed90a17a472"
       def install
         bin.install "lts"
       end
