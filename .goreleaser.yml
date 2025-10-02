@@ -62,13 +62,3 @@ release:
     name: lts
   extra_files:
     - glob: ./install.sh
-
-# Universal installation script
-announce:
-  skip: false
-
-# Generate install script
-blobs:
-  - provider: s3
-    bucket: "{{ .Env.AWS_BUCKET }}"
-    directory: "{{ .ProjectName }}/{{ .Version }}"
