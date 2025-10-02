@@ -1,0 +1,45 @@
+FROM golang:1.25-alpine AS builder
+
+WORKDIR /app
+
+# Copy go mod files
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Copy source code
+COPY . .
+
+# Build the binary
+RUN CGO_ENABLED=0 GOOS=linux go build -o lts main.go
+
+# Final stage
+FROM alpine:latest
+
+# Install dependencies for VHS
+RUN apk add --no-cache \
+    bash \
+    ffmpeg \
+    ttyd \
+    chromium \
+    chromium-chromedriver \
+    ca-certificates \
+    curl
+
+# Install VHS
+RUN curl -L https://github.com/charmbracelet/vhs/releases/download/v0.10.0/vhs_0.10.0_Linux_arm64.tar.gz -o /tmp/vhs.tar.gz && \
+    tar xzf /tmp/vhs.tar.gz -C /tmp && \
+    find /tmp -name vhs -type f -exec mv {} /usr/local/bin/vhs \; && \
+    chmod +x /usr/local/bin/vhs && \
+    rm /tmp/vhs.tar.gz
+
+# Copy the built binary
+COPY --from=builder /app/lts /usr/local/bin/lts
+
+# Create working directory
+WORKDIR /demo
+
+# Copy demo files
+COPY demo.tape .
+COPY .lts.json.demo /root/.lts.json
+
+CMD ["sh"]

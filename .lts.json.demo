@@ -1,0 +1,7 @@
+{
+  "llm_provider": "ollama",
+  "ollama": {
+    "url": "http://ollama:11434",
+    "model": "llama3.2"
+  }
+}
