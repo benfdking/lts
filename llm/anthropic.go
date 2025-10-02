@@ -9,7 +9,9 @@ import (
 	"os"
 )
 
-type AnthropicProvider struct{}
+type AnthropicProvider struct {
+	Model string
+}
 
 type anthropicRequest struct {
 	Model     string    `json:"model"`
@@ -39,8 +41,13 @@ func (a *AnthropicProvider) Translate(prompt string) (string, error) {
 
 	systemPrompt := "You are a CLI command translator. Convert natural language requests into shell commands. Return ONLY the command, nothing else. No explanations, no markdown, just the raw command."
 
+	model := a.Model
+	if model == "" {
+		model = "claude-3-5-sonnet-20241022"
+	}
+
 	reqBody := anthropicRequest{
-		Model:     "claude-3-5-sonnet-20241022",
+		Model:     model,
 		MaxTokens: 1024,
 		Messages: []message{
 			{
