@@ -118,6 +118,33 @@ $ lts find all typescript files modified in the last 7 days
 find . -name "*.ts" -mtime -7
 ```
 
+## Shell Integration (Optional)
+
+By default, LTS prints commands to stdout. You can optionally enable shell integration to inject commands directly into your shell's input buffer, allowing you to edit before executing:
+
+### Bash
+
+Add to your `~/.bashrc`:
+```bash
+eval "$(lts shell-integration bash)"
+```
+
+### Zsh
+
+Add to your `~/.zshrc`:
+```zsh
+eval "$(lts shell-integration zsh)"
+```
+
+### Fish
+
+Run once:
+```fish
+lts shell-integration fish > ~/.config/fish/conf.d/lts.fish
+```
+
+After enabling shell integration, LTS commands will appear in your prompt ready to edit or execute.
+
 ## Shell Completion
 
 Generate completion scripts for your shell:
