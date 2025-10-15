@@ -23,6 +23,16 @@ lts() {
         fi
     done
 
+    # Pass through subcommands directly (help, init, completion)
+    if [ $# -gt 0 ]; then
+        case "$1" in
+            help|init|completion|--help|-h)
+                command "$LTS_BINARY" "$@"
+                return $?
+                ;;
+        esac
+    fi
+
     # Generate the command using the lts binary
     local cmd
     cmd=$(command "$LTS_BINARY" "$@" 2>&1)

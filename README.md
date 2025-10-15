@@ -23,7 +23,7 @@ This script automatically detects your OS and architecture, then downloads and i
 ### Homebrew (macOS/Linux)
 
 ```bash
-brew tap benfdking/lts
+brew tap benfdking/lts https://github.com/benfdking/lts
 brew install lts
 ```
 
