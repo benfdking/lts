@@ -5,42 +5,63 @@
 class Lts < Formula
   desc "Convert natural language to shell commands using AI"
   homepage "https://github.com/benfdking/lts"
-  version "0.0.8"
+  version "0.0.9"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.8/lts_Darwin_x86_64.tar.gz"
-      sha256 "11d8f977b3836cf9980fc10c4967edf18d6bfe133d91ba4acfdfa1b722128914"
+      url "https://github.com/benfdking/lts/releases/download/v0.0.9/lts_Darwin_x86_64.tar.gz"
+      sha256 "a6ae9ac2437309fb4d908c5fc111f233da68754d94b043deae4185f4aab95ea4"
 
       def install
-        bin.install "lts"
+        bin.install "lts" => "lts-bin"
+        bin.install "lts-wrapper.sh" => "lts"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.8/lts_Darwin_arm64.tar.gz"
-      sha256 "73b1e3769c68d1267b02d9a472c07e355cf933a60c91e0f66311fc50b9c93a50"
+      url "https://github.com/benfdking/lts/releases/download/v0.0.9/lts_Darwin_arm64.tar.gz"
+      sha256 "8b504e1f2840b29700b8f4fcf8ceecaa8157356c086c921d923deedf72ea4ccd"
 
       def install
-        bin.install "lts"
+        bin.install "lts" => "lts-bin"
+        bin.install "lts-wrapper.sh" => "lts"
       end
     end
   end
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.8/lts_Linux_x86_64.tar.gz"
-      sha256 "97bb96715574ba30fd76f816e7b0a43b39d16919b6468ca9d7bae177440c62f8"
+      url "https://github.com/benfdking/lts/releases/download/v0.0.9/lts_Linux_x86_64.tar.gz"
+      sha256 "fe81fbc7c3e29d2e02e28d70890d9303422369594df4dcbb302051167f686933"
       def install
-        bin.install "lts"
+        bin.install "lts" => "lts-bin"
+        bin.install "lts-wrapper.sh" => "lts"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.8/lts_Linux_arm64.tar.gz"
-      sha256 "951c9030aadc30d512b978bfcced02bed6df1fb8e223cb175d36aed90a17a472"
+      url "https://github.com/benfdking/lts/releases/download/v0.0.9/lts_Linux_arm64.tar.gz"
+      sha256 "3205061146a909cddb310f039a3df136f670cd705ab7a2a811b89fb195f72f37"
       def install
-        bin.install "lts"
+        bin.install "lts" => "lts-bin"
+        bin.install "lts-wrapper.sh" => "lts"
       end
     end
+  end
+
+  def caveats
+    <<~EOS
+      LTS has been installed with interactive command execution enabled by default.
+
+      When you run 'lts', it will:
+      1. Generate the command using AI
+      2. Show you the command
+      3. Prompt "Execute? (y/N)" for confirmation
+      4. Run the command if you confirm
+
+      For scripting or piping, use the --raw flag:
+        lts --raw list all pdf files
+
+      Run 'lts init' to configure your LLM provider.
+    EOS
   end
 end
