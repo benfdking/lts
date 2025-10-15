@@ -35,6 +35,8 @@ archives:
       - goos: windows
         formats:
           - zip
+    files:
+      - lts-wrapper.sh
 
 changelog:
   sort: asc
@@ -55,6 +57,23 @@ brews:
     license: "MIT"
     install: |
       bin.install "lts"
+      share.install "lts-wrapper.sh" => "lts/lts-wrapper.sh"
+    caveats: |
+      To enable interactive command execution, add this to your shell config:
+
+      For Bash (~/.bashrc):
+        source #{HOMEBREW_PREFIX}/share/lts/lts-wrapper.sh
+
+      For Zsh (~/.zshrc):
+        source #{HOMEBREW_PREFIX}/share/lts/lts-wrapper.sh
+
+      For Fish (~/.config/fish/config.fish):
+        source #{HOMEBREW_PREFIX}/share/lts/lts-wrapper.sh
+
+      Then reload your shell or run: source ~/.bashrc (or ~/.zshrc)
+
+      Without the wrapper, 'lts' will only print commands.
+      Run 'lts init' to configure your LLM provider.
 
 release:
   github:
@@ -62,3 +81,4 @@ release:
     name: lts
   extra_files:
     - glob: ./install.sh
+    - glob: ./lts-wrapper.sh
