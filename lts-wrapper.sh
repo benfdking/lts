@@ -38,6 +38,9 @@ lts() {
     cmd=$(command "$LTS_BINARY" "$@" 2>&1)
     local exit_code=$?
 
+    # Strip trailing newline if present
+    cmd=$(printf '%s' "$cmd" | sed -e 's/[[:space:]]*$//')
+
     # Check if command generation failed
     if [ $exit_code -ne 0 ]; then
         echo "$cmd" >&2
