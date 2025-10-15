@@ -55,8 +55,8 @@ class Lts < Formula
       When you run 'lts', it will:
       1. Generate the command using AI
       2. Show you the command
-      3. Prompt "Execute? (y/N)" for confirmation
-      4. Run the command if you confirm
+      3. Pre-fill the command in your shell prompt
+      4. Press Enter to execute (or edit before running)
 
       For scripting or piping, use the --raw flag:
         lts --raw list all pdf files
