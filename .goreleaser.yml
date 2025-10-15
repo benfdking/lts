@@ -56,23 +56,20 @@ brews:
     description: "Convert natural language to shell commands using AI"
     license: "MIT"
     install: |
-      bin.install "lts"
-      share.install "lts-wrapper.sh" => "lts/lts-wrapper.sh"
+      bin.install "lts" => "lts-bin"
+      bin.install "lts-wrapper.sh" => "lts"
     caveats: |
-      To enable interactive command execution, add this to your shell config:
+      LTS has been installed with interactive command execution enabled by default.
 
-      For Bash (~/.bashrc):
-        source #{HOMEBREW_PREFIX}/share/lts/lts-wrapper.sh
+      When you run 'lts', it will:
+      1. Generate the command using AI
+      2. Show you the command
+      3. Prompt "Execute? (y/N)" for confirmation
+      4. Run the command if you confirm
 
-      For Zsh (~/.zshrc):
-        source #{HOMEBREW_PREFIX}/share/lts/lts-wrapper.sh
+      For scripting or piping, use the --raw flag:
+        lts --raw list all pdf files
 
-      For Fish (~/.config/fish/config.fish):
-        source #{HOMEBREW_PREFIX}/share/lts/lts-wrapper.sh
-
-      Then reload your shell or run: source ~/.bashrc (or ~/.zshrc)
-
-      Without the wrapper, 'lts' will only print commands.
       Run 'lts init' to configure your LLM provider.
 
 release:

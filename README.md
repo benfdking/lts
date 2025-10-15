@@ -27,6 +27,8 @@ brew tap benfdking/lts
 brew install lts
 ```
 
+Interactive command execution is enabled by default with Homebrew - just run `lts` and start using it!
+
 ### Download pre-built binaries
 
 Download the latest release from the [releases page](https://github.com/benfdking/lts/releases).
@@ -99,37 +101,32 @@ export OPENAI_API_KEY=your_key_here
 }
 ```
 
-## Shell Integration (Recommended)
+## Interactive Command Execution
 
-For the best experience, enable interactive command execution by sourcing the wrapper script in your shell configuration:
+### Homebrew Installation (Automatic)
 
-### After installing via Homebrew
+If you installed via Homebrew, interactive mode is **enabled by default** - no additional setup needed! Just run `lts` and it will prompt you to execute commands.
 
-The installation will show you instructions. Simply add this line to your shell config:
+### Manual Installation (Install Script)
 
-```bash
-# For Bash (~/.bashrc) or Zsh (~/.zshrc)
-source $(brew --prefix)/share/lts/lts-wrapper.sh
-```
-
-### After installing via the install script
-
-Add this line to your shell config:
+If you used the install script, you can enable interactive mode by sourcing the wrapper in your shell config:
 
 ```bash
 # For Bash (~/.bashrc) or Zsh (~/.zshrc)
 source /usr/local/share/lts/lts-wrapper.sh
 ```
 
-### What does the wrapper do?
+Then reload your shell or run: `source ~/.bashrc` (or `~/.zshrc`)
 
-With the wrapper enabled, `lts` will:
+### How It Works
+
+When interactive mode is enabled, `lts` will:
 1. Generate the command using AI
 2. Show you the command
 3. Prompt "Execute? (y/N)" for confirmation
 4. Run the command if you confirm
 
-Without the wrapper, `lts` only prints the command to stdout.
+Without interactive mode, `lts` only prints the command to stdout.
 
 ## Usage
 
