@@ -5,13 +5,13 @@
 class Lts < Formula
   desc "Convert natural language to shell commands using AI"
   homepage "https://github.com/benfdking/lts"
-  version "0.0.11"
+  version "0.0.12"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.11/lts_Darwin_x86_64.tar.gz"
-      sha256 "5a359b2cc516e58334c3ba4e7b74b576335727af37e61cd920e9574d0311da3b"
+      url "https://github.com/benfdking/lts/releases/download/v0.0.12/lts_Darwin_x86_64.tar.gz"
+      sha256 "6aebadf93872776e4a808a3dd4e18d04609a16b1f82cc269ae6855064e2ec4b4"
 
       def install
         bin.install "lts" => "lts-bin"
@@ -19,8 +19,8 @@ class Lts < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.11/lts_Darwin_arm64.tar.gz"
-      sha256 "fd93a5f22b60c7ce403b8f6414db92942de0fbe9169cca3c6e0166eb0363ba7f"
+      url "https://github.com/benfdking/lts/releases/download/v0.0.12/lts_Darwin_arm64.tar.gz"
+      sha256 "006c2fdb366919d2a12be448a46f8c325abac7cd2a2912e4fb28f2609ef4b148"
 
       def install
         bin.install "lts" => "lts-bin"
@@ -31,16 +31,16 @@ class Lts < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.11/lts_Linux_x86_64.tar.gz"
-      sha256 "31754f3dfd2fe827989c7e7498620d08d8ee08c82ed65d44f752663017809531"
+      url "https://github.com/benfdking/lts/releases/download/v0.0.12/lts_Linux_x86_64.tar.gz"
+      sha256 "16e98ace949bff1d3578c0955db0e9204370fa419a2aa98659786975192e9947"
       def install
         bin.install "lts" => "lts-bin"
         bin.install "lts-wrapper.sh" => "lts"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.11/lts_Linux_arm64.tar.gz"
-      sha256 "cecc7ce4e7052cdc16b2bfc49fc9844828b8513f64c4a3f5fe6d64ac002fe752"
+      url "https://github.com/benfdking/lts/releases/download/v0.0.12/lts_Linux_arm64.tar.gz"
+      sha256 "021c69b9e8c78bb1afe91d0a694060081a1a51505f6be1a7b432ea5a61419be3"
       def install
         bin.install "lts" => "lts-bin"
         bin.install "lts-wrapper.sh" => "lts"
