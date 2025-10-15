@@ -1,20 +1,31 @@
 #!/bin/sh
 # LTS Shell Wrapper
 # This wrapper provides interactive command execution for lts
-# Source this file in your shell configuration (.bashrc, .zshrc, etc.)
+#
+# When installed via Homebrew, this script is installed as 'lts' and calls 'lts-bin'
+# When sourced manually, this defines an lts() function that wraps the lts binary
+
+# Determine the underlying binary name
+# If lts-bin exists in PATH, use it (Homebrew installation)
+# Otherwise use 'lts' (manual source installation)
+if command -v lts-bin >/dev/null 2>&1; then
+    LTS_BINARY="lts-bin"
+else
+    LTS_BINARY="lts"
+fi
 
 lts() {
     # Check if --raw flag is present (for scripting/piping)
     for arg in "$@"; do
         if [ "$arg" = "--raw" ]; then
-            command lts "$@"
+            command "$LTS_BINARY" "$@"
             return $?
         fi
     done
 
     # Generate the command using the lts binary
     local cmd
-    cmd=$(command lts "$@" 2>&1)
+    cmd=$(command "$LTS_BINARY" "$@" 2>&1)
     local exit_code=$?
 
     # Check if command generation failed
@@ -43,3 +54,9 @@ lts() {
             ;;
     esac
 }
+
+# If this script is being executed directly (not sourced), call lts function
+# This handles the case where it's installed as /usr/local/bin/lts via Homebrew
+if [ "${BASH_SOURCE[0]}" = "${0}" ] 2>/dev/null || [ "${(%):-%x}" = "${0}" ] 2>/dev/null || [ -z "$PS1" ]; then
+    lts "$@"
+fi
