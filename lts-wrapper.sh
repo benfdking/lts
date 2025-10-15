@@ -49,20 +49,19 @@ lts() {
     echo "  $cmd"
     echo
 
-    # Prompt for execution
-    printf "Execute? (y/N): "
-    read -r response
-
-    case "$response" in
-        [yY]|[yY][eE][sS])
-            echo
-            eval "$cmd"
-            ;;
-        *)
-            echo "Command not executed."
-            return 1
-            ;;
-    esac
+    # Pre-fill the command in the shell buffer
+    # Use shell-specific method to push command to input buffer
+    if [ -n "$ZSH_VERSION" ]; then
+        # Zsh: use print -z to push to buffer stack
+        print -z "$cmd"
+    elif [ -n "$BASH_VERSION" ]; then
+        # Bash: use bind to pre-fill readline
+        bind '"\e[0n": "'"$cmd"'"'
+        printf '\e[5n'
+    else
+        # Fallback for other shells: just print the command
+        echo "$cmd"
+    fi
 }
 
 # If this script is being executed directly (not sourced), call lts function
