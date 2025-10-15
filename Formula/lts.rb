@@ -5,13 +5,13 @@
 class Lts < Formula
   desc "Convert natural language to shell commands using AI"
   homepage "https://github.com/benfdking/lts"
-  version "0.0.10"
+  version "0.0.11"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.10/lts_Darwin_x86_64.tar.gz"
-      sha256 "199643f9ed892f6b72b9aa36afa436b489a33cd38dc47ad8bb50f3f3dac2d035"
+      url "https://github.com/benfdking/lts/releases/download/v0.0.11/lts_Darwin_x86_64.tar.gz"
+      sha256 "5a359b2cc516e58334c3ba4e7b74b576335727af37e61cd920e9574d0311da3b"
 
       def install
         bin.install "lts" => "lts-bin"
@@ -19,8 +19,8 @@ class Lts < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.10/lts_Darwin_arm64.tar.gz"
-      sha256 "b0bd08df26a9e0b61cdb07fd78d881841abdc4b98c099aa27012d93b0b530507"
+      url "https://github.com/benfdking/lts/releases/download/v0.0.11/lts_Darwin_arm64.tar.gz"
+      sha256 "fd93a5f22b60c7ce403b8f6414db92942de0fbe9169cca3c6e0166eb0363ba7f"
 
       def install
         bin.install "lts" => "lts-bin"
@@ -31,16 +31,16 @@ class Lts < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.10/lts_Linux_x86_64.tar.gz"
-      sha256 "6c6fb2573559e341ecfd81cea7fc0fe146fbbe780eb382a8d4dd2efa0c7e7b7b"
+      url "https://github.com/benfdking/lts/releases/download/v0.0.11/lts_Linux_x86_64.tar.gz"
+      sha256 "31754f3dfd2fe827989c7e7498620d08d8ee08c82ed65d44f752663017809531"
       def install
         bin.install "lts" => "lts-bin"
         bin.install "lts-wrapper.sh" => "lts"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.10/lts_Linux_arm64.tar.gz"
-      sha256 "e8e36a5ae63da32bb223c657ba7a86213f08444a443f0172501f646e4dcc4173"
+      url "https://github.com/benfdking/lts/releases/download/v0.0.11/lts_Linux_arm64.tar.gz"
+      sha256 "cecc7ce4e7052cdc16b2bfc49fc9844828b8513f64c4a3f5fe6d64ac002fe752"
       def install
         bin.install "lts" => "lts-bin"
         bin.install "lts-wrapper.sh" => "lts"
@@ -55,8 +55,8 @@ class Lts < Formula
       When you run 'lts', it will:
       1. Generate the command using AI
       2. Show you the command
-      3. Pre-fill the command in your shell prompt
-      4. Press Enter to execute (or edit before running)
+      3. Prompt "Execute? (y/N)" for confirmation
+      4. Run the command if you confirm
 
       For scripting or piping, use the --raw flag:
         lts --raw list all pdf files
