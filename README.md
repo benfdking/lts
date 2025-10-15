@@ -99,9 +99,57 @@ export OPENAI_API_KEY=your_key_here
 }
 ```
 
+## Shell Integration (Recommended)
+
+For the best experience, enable interactive command execution by sourcing the wrapper script in your shell configuration:
+
+### After installing via Homebrew
+
+The installation will show you instructions. Simply add this line to your shell config:
+
+```bash
+# For Bash (~/.bashrc) or Zsh (~/.zshrc)
+source $(brew --prefix)/share/lts/lts-wrapper.sh
+```
+
+### After installing via the install script
+
+Add this line to your shell config:
+
+```bash
+# For Bash (~/.bashrc) or Zsh (~/.zshrc)
+source /usr/local/share/lts/lts-wrapper.sh
+```
+
+### What does the wrapper do?
+
+With the wrapper enabled, `lts` will:
+1. Generate the command using AI
+2. Show you the command
+3. Prompt "Execute? (y/N)" for confirmation
+4. Run the command if you confirm
+
+Without the wrapper, `lts` only prints the command to stdout.
+
 ## Usage
 
+### Interactive Mode (with wrapper enabled)
+
 Simply describe what you want to do in natural language:
+
+```bash
+$ lts add all my files to git and then commit it with the message "finished"
+Generated command:
+  git add . && git commit -m "finished"
+
+Execute? (y/N): y
+
+[git output]
+```
+
+### Raw Output Mode (without wrapper or with --raw flag)
+
+Use the `--raw` flag for scripting or when the wrapper is not enabled:
 
 ```bash
 $ lts add all my files to git and then commit it with the message "finished"
@@ -109,13 +157,26 @@ git add . && git commit -m "finished"
 ```
 
 ```bash
-$ lts list all pdf files in the current directory
+$ lts --raw list all pdf files in the current directory
 ls *.pdf
 ```
 
 ```bash
-$ lts find all typescript files modified in the last 7 days
+$ lts --raw find all typescript files modified in the last 7 days
 find . -name "*.ts" -mtime -7
+```
+
+### Using in Scripts
+
+The `--raw` flag is useful for piping or scripting:
+
+```bash
+# Execute directly without prompts
+$ eval "$(lts --raw list all pdf files)"
+
+# Save to a variable
+$ CMD=$(lts --raw find large files)
+$ echo "Generated: $CMD"
 ```
 
 ## Shell Completion

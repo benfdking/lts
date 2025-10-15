@@ -11,6 +11,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var (
+	rawOutput bool
+)
+
 var rootCmd = &cobra.Command{
 	Use:   "lts [natural language command]",
 	Short: "Convert natural language to CLI commands",
@@ -79,4 +83,8 @@ func Execute() {
 	if err := rootCmd.Execute(); err != nil {
 		os.Exit(1)
 	}
+}
+
+func init() {
+	rootCmd.Flags().BoolVar(&rawOutput, "raw", false, "Output raw command without prompts (for scripting)")
 }

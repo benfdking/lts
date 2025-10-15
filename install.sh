@@ -6,6 +6,7 @@ set -e
 
 GITHUB_REPO="benfdking/lts"
 INSTALL_DIR="${INSTALL_DIR:-/usr/local/bin}"
+SHARE_DIR="${SHARE_DIR:-/usr/local/share/lts}"
 
 # Detect OS
 OS="$(uname -s)"
@@ -62,6 +63,15 @@ else
     BINARY="lts"
 fi
 
+# Download wrapper script
+echo "Downloading wrapper script..."
+WRAPPER_URL="https://raw.githubusercontent.com/${GITHUB_REPO}/main/lts-wrapper.sh"
+curl -fsSL -o "lts-wrapper.sh" "${WRAPPER_URL}" || {
+    echo "Warning: Failed to download wrapper script. Continuing with binary installation only."
+    WRAPPER_DOWNLOADED=false
+}
+WRAPPER_DOWNLOADED=true
+
 # Install binary
 echo "Installing to ${INSTALL_DIR}..."
 if [ -w "$INSTALL_DIR" ]; then
@@ -73,5 +83,55 @@ else
     sudo chmod +x "${INSTALL_DIR}/${BINARY}"
 fi
 
+# Install wrapper script if downloaded
+if [ "$WRAPPER_DOWNLOADED" = true ]; then
+    echo "Installing wrapper script to ${SHARE_DIR}..."
+    if [ -w "$(dirname "$SHARE_DIR")" ] || [ -w "$SHARE_DIR" ] 2>/dev/null; then
+        mkdir -p "$SHARE_DIR"
+        cp "lts-wrapper.sh" "${SHARE_DIR}/"
+        chmod +x "${SHARE_DIR}/lts-wrapper.sh"
+    else
+        echo "Requesting elevated permissions to install wrapper..."
+        sudo mkdir -p "$SHARE_DIR"
+        sudo cp "lts-wrapper.sh" "${SHARE_DIR}/"
+        sudo chmod +x "${SHARE_DIR}/lts-wrapper.sh"
+    fi
+fi
+
+echo
 echo "✓ lts ${LATEST_VERSION} installed successfully!"
-echo "Run 'lts --help' to get started."
+echo
+
+# Show usage instructions
+if [ "$WRAPPER_DOWNLOADED" = true ]; then
+    echo "To enable interactive command execution, add this to your shell config:"
+    echo
+
+    # Detect shell and show appropriate instructions
+    CURRENT_SHELL=$(basename "$SHELL" 2>/dev/null || echo "bash")
+    case "$CURRENT_SHELL" in
+        bash)
+            echo "  # For Bash (~/.bashrc):"
+            echo "  source ${SHARE_DIR}/lts-wrapper.sh"
+            ;;
+        zsh)
+            echo "  # For Zsh (~/.zshrc):"
+            echo "  source ${SHARE_DIR}/lts-wrapper.sh"
+            ;;
+        fish)
+            echo "  # For Fish (~/.config/fish/config.fish):"
+            echo "  source ${SHARE_DIR}/lts-wrapper.sh"
+            ;;
+        *)
+            echo "  # Add to your shell config file:"
+            echo "  source ${SHARE_DIR}/lts-wrapper.sh"
+            ;;
+    esac
+
+    echo
+    echo "Then reload your shell or run: source ~/.bashrc (or ~/.zshrc)"
+    echo
+fi
+
+echo "Run 'lts init' to configure your LLM provider."
+echo "Run 'lts --help' for more information."
