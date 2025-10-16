@@ -8,11 +8,7 @@
 # Determine the underlying binary name
 # If lts-bin exists in PATH, use it (Homebrew installation)
 # Otherwise use 'lts' (manual source installation)
-if command -v lts-bin >/dev/null 2>&1; then
-    LTS_BINARY="lts-bin"
-else
-    LTS_BINARY="lts"
-fi
+LTS_BINARY="lts-bin"
 
 lts() {
     # Check if --raw flag is present (for scripting/piping)
@@ -38,19 +34,11 @@ lts() {
     cmd=$(command "$LTS_BINARY" "$@" 2>&1)
     local exit_code=$?
 
-    # Strip trailing newline if present
-    cmd=$(printf '%s' "$cmd" | sed -e 's/[[:space:]]*$//')
-
     # Check if command generation failed
     if [ $exit_code -ne 0 ]; then
         echo "$cmd" >&2
         return $exit_code
     fi
-
-    # Display the generated command
-    echo "Generated command:"
-    echo "  $cmd"
-    echo
 
     # Pre-fill the command in the shell buffer
     # Use shell-specific method to push command to input buffer
