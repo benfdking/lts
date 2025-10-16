@@ -50,7 +50,7 @@ var rootCmd = &cobra.Command{
 		}
 
 		// Output the command
-		fmt.Println(command)
+		fmt.Print(command)
 
 		return nil
 	},
