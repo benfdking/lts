@@ -37,6 +37,7 @@ archives:
           - zip
     files:
       - lts-wrapper.sh
+      - scripts/lts.zsh
 
 changelog:
   sort: asc
@@ -58,19 +59,27 @@ brews:
     install: |
       bin.install "lts" => "lts-bin"
       bin.install "lts-wrapper.sh" => "lts"
+      (pkgshare/"zsh").install "scripts/lts.zsh"
     caveats: |
       LTS has been installed with interactive command execution enabled by default.
 
-      When you run 'lts', it will:
-      1. Generate the command using AI
-      2. Show you the command
-      3. Prompt "Execute? (y/N)" for confirmation
-      4. Run the command if you confirm
+      To enable zsh integration (function + keybinding), add to your ~/.zshrc:
+
+        # LTS zsh integration
+        source "#{opt_pkgshare}/zsh/lts.zsh"
+
+      Then restart your shell or run:
+        source ~/.zshrc
+
+      Usage:
+        - `lts <natural language>` to insert a command at the prompt
+        - Press Ctrl-X then L to transform the current line
 
       For scripting or piping, use the --raw flag:
         lts --raw list all pdf files
 
-      Run 'lts init' to configure your LLM provider.
+      To configure your LLM provider:
+        lts init
 
 release:
   github:
