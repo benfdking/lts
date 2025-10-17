@@ -36,7 +36,6 @@ archives:
         formats:
           - zip
     files:
-      - lts-wrapper.sh
       - scripts/lts.zsh
 
 changelog:
@@ -58,17 +57,15 @@ brews:
     license: "MIT"
     install: |
       bin.install "lts" => "lts-bin"
-      bin.install "lts-wrapper.sh" => "lts"
       (pkgshare/"zsh").install "scripts/lts.zsh"
     caveats: |
       LTS has been installed with interactive command execution enabled by default.
 
       To enable zsh integration (function + keybinding), add to your ~/.zshrc:
 
-        # LTS zsh integration
-        source "#{opt_pkgshare}/zsh/lts.zsh"
+        echo 'source "$(brew --prefix)/opt/lts/share/zsh/lts.zsh"' >> ~/.zshrc
 
-      Then restart your shell or run:
+      Then restart your shell:
         source ~/.zshrc
 
       Usage:
@@ -87,4 +84,3 @@ release:
     name: lts
   extra_files:
     - glob: ./install.sh
-    - glob: ./lts-wrapper.sh
