@@ -51,11 +51,8 @@ Set Shell "zsh"
 
 Type "# LTS - Language To Shell" Sleep 1s Enter
 Type "# Convert natural language to shell commands using AI" Sleep 1s Enter
-Sleep 1s
 
 # Demo: List PDF files
 Type "lts list all pdf files in the current directory" Sleep 500ms Enter
-Sleep 2s
 
 Type "# Works with any shell command!" Sleep 1s Enter
-Sleep 2s
