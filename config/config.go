@@ -14,6 +14,7 @@ type Config struct {
 	Ollama    *Ollama    `json:"ollama,omitempty"`
 	Anthropic *Anthropic `json:"anthropic,omitempty"`
 	OpenAI    *OpenAI    `json:"openai,omitempty"`
+	Test      *Test      `json:"test,omitempty"`
 }
 
 type Ollama struct {
@@ -27,6 +28,11 @@ type Anthropic struct {
 
 type OpenAI struct {
 	Model string `json:"model"`
+}
+
+type Test struct {
+	Seconds int    `json:"seconds"`
+	Text    string `json:"text"`
 }
 
 // Load the config from the dotfile location.
