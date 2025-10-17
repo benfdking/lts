@@ -25,6 +25,13 @@ func NewProvider(cfg *config.Config) (Provider, error) {
 			provider.Model = cfg.Ollama.Model
 		}
 		return provider, nil
+	case "test":
+		provider := &TestProvider{}
+		if cfg.Test != nil {
+			provider.Seconds = cfg.Test.Seconds
+			provider.Text = cfg.Test.Text
+		}
+		return provider, nil
 	default:
 		return nil, fmt.Errorf("unsupported LLM provider: %s", cfg.Provider)
 	}
