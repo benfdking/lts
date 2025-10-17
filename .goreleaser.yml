@@ -36,7 +36,6 @@ archives:
         formats:
           - zip
     files:
-      - lts-wrapper.sh
       - scripts/lts.zsh
 
 changelog:
@@ -58,7 +57,6 @@ brews:
     license: "MIT"
     install: |
       bin.install "lts" => "lts-bin"
-      bin.install "lts-wrapper.sh" => "lts"
       (pkgshare/"zsh").install "scripts/lts.zsh"
     caveats: |
       LTS has been installed with interactive command execution enabled by default.
@@ -87,4 +85,3 @@ release:
     name: lts
   extra_files:
     - glob: ./install.sh
-    - glob: ./lts-wrapper.sh
