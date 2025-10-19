@@ -31,7 +31,7 @@ Interactive command execution is enabled by default with Homebrew - just run `lt
 
 ## Configuration
 
-Create a configuration file at `~/.lts.json`:
+Run `lts init` for interactive setup, or create a configuration file at `~/.lts.json` manually:
 
 ### Claude Code (Recommended)
 
