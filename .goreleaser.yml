@@ -58,29 +58,7 @@ brews:
     install: |
       bin.install "lts" => "lts-bin"
       (pkgshare/"zsh").install "scripts/lts.zsh"
-    caveats: |
-      LTS has been installed with interactive command execution enabled by default.
-
-      To enable zsh integration (function + keybinding), add to your ~/.zshrc:
-
-        echo 'source "$(brew --prefix)/opt/lts/share/zsh/lts.zsh"' >> ~/.zshrc
-
-      Then restart your shell:
-        source ~/.zshrc
-
-      Usage:
-        - `lts <natural language>` to insert a command at the prompt
-        - Press Ctrl-X then L to transform the current line
-
-      For scripting or piping, use the --raw flag:
-        lts --raw list all pdf files
-
-      To configure your LLM provider:
-        lts init
-
 release:
   github:
     owner: benfdking
     name: lts
-  extra_files:
-    - glob: ./install.sh
