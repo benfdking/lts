@@ -16,6 +16,7 @@ class Lts < Formula
       def install
         bin.install "lts" => "lts-bin"
         (pkgshare/"zsh").install "scripts/lts.zsh"
+        (pkgshare/"bash").install "scripts/lts.bash"
       end
     end
     if Hardware::CPU.arm?
@@ -25,6 +26,7 @@ class Lts < Formula
       def install
         bin.install "lts" => "lts-bin"
         (pkgshare/"zsh").install "scripts/lts.zsh"
+        (pkgshare/"bash").install "scripts/lts.bash"
       end
     end
   end
@@ -36,6 +38,7 @@ class Lts < Formula
       def install
         bin.install "lts" => "lts-bin"
         (pkgshare/"zsh").install "scripts/lts.zsh"
+        (pkgshare/"bash").install "scripts/lts.bash"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
@@ -44,6 +47,7 @@ class Lts < Formula
       def install
         bin.install "lts" => "lts-bin"
         (pkgshare/"zsh").install "scripts/lts.zsh"
+        (pkgshare/"bash").install "scripts/lts.bash"
       end
     end
   end
@@ -52,17 +56,19 @@ class Lts < Formula
     <<~EOS
       LTS has been installed with interactive command execution enabled by default.
 
-      To enable zsh integration (function + keybinding), add to your ~/.zshrc:
+      To enable zsh integration, add to your ~/.zshrc:
 
-        # LTS zsh integration
         source "#{opt_pkgshare}/zsh/lts.zsh"
 
+      To enable bash integration, add to your ~/.bashrc:
+
+        source "#{opt_pkgshare}/bash/lts.bash"
+
       Then restart your shell or run:
-        source ~/.zshrc
+        source ~/.zshrc  # or ~/.bashrc for bash
 
       Usage:
         - `lts <natural language>` to insert a command at the prompt
-        - Press Ctrl-X then L to transform the current line
 
       For scripting or piping, use the --raw flag:
         lts --raw list all pdf files

@@ -37,6 +37,7 @@ archives:
           - zip
     files:
       - scripts/lts.zsh
+      - scripts/lts.bash
 
 changelog:
   sort: asc
@@ -58,19 +59,23 @@ brews:
     install: |
       bin.install "lts" => "lts-bin"
       (pkgshare/"zsh").install "scripts/lts.zsh"
+      (pkgshare/"bash").install "scripts/lts.bash"
     caveats: |
       LTS has been installed with interactive command execution enabled by default.
 
-      To enable zsh integration (function + keybinding), add to your ~/.zshrc:
+      To enable zsh integration, add to your ~/.zshrc:
 
-        echo 'source "$(brew --prefix)/opt/lts/share/zsh/lts.zsh"' >> ~/.zshrc
+        source "$(brew --prefix)/share/lts/zsh/lts.zsh"
 
-      Then restart your shell:
-        source ~/.zshrc
+      To enable bash integration, add to your ~/.bashrc:
+
+        source "$(brew --prefix)/share/lts/bash/lts.bash"
+
+      Then restart your shell or run:
+        source ~/.zshrc  # or ~/.bashrc for bash
 
       Usage:
         - `lts <natural language>` to insert a command at the prompt
-        - Press Ctrl-X then L to transform the current line
 
       For scripting or piping, use the --raw flag:
         lts --raw list all pdf files
