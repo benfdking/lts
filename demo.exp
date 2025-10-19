@@ -1,0 +1,65 @@
+#!/usr/bin/expect -f
+
+# Set timeout
+set timeout 30
+
+# Disable output buffering for smoother playback
+log_user 1
+
+# Function to type characters one by one with delay
+proc type_slowly {text delay} {
+    foreach char [split $text ""] {
+        send -- $char
+        sleep $delay
+    }
+}
+
+# Start zsh shell
+spawn zsh
+
+# Wait for prompt
+expect {
+    "#" { }
+    timeout { exit 1 }
+}
+
+sleep 1
+
+# Clear screen first
+send "clear\r"
+expect "#"
+sleep 0.5
+
+# Demo title
+type_slowly "# LTS Demo - AI-powered shell commands" 0.03
+send "\r"
+sleep 2
+
+send "\r"
+sleep 0.5
+
+# Show usage example
+type_slowly "lts list all pdf files in the current directory" 0.04
+sleep 1
+send "\r"
+
+# Wait for lts to process and populate the buffer with the suggested command
+sleep 3
+
+# The command should now be in the buffer from print -z, press Enter to execute it
+send "\r"
+
+sleep 3
+
+send "\r"
+sleep 0.5
+
+# Another example
+type_slowly "# Try it with any command you need!" 0.03
+send "\r"
+sleep 2
+
+# Exit the shell
+send "exit\r"
+
+expect eof

@@ -15,42 +15,47 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o lts main.go
 # Final stage
 FROM alpine:latest
 
-# Install dependencies for VHS
+# Install dependencies for asciinema and expect
 RUN apk add --no-cache \
     bash \
-    ffmpeg \
-    ttyd \
-    chromium \
-    chromium-chromedriver \
     ca-certificates \
-    curl \ 
-    zsh
+    curl \
+    zsh \
+    expect \
+    asciinema \
+    cargo \
+    rust \
+    font-dejavu \
+    font-liberation \
+    font-noto
 
-# Install VHS
-RUN ARCH=$(uname -m) && \
-    if [ "$ARCH" = "aarch64" ]; then ARCH="arm64"; fi && \
-    if [ "$ARCH" = "x86_64" ]; then ARCH="x86_64"; fi && \
-    curl -L https://github.com/charmbracelet/vhs/releases/download/v0.10.0/vhs_0.10.0_Linux_${ARCH}.tar.gz -o /tmp/vhs.tar.gz && \
-    tar xzf /tmp/vhs.tar.gz -C /tmp && \
-    find /tmp -name vhs -type f -exec mv {} /usr/local/bin/vhs \; && \
-    chmod +x /usr/local/bin/vhs && \
-    rm /tmp/vhs.tar.gz
+# Install agg (asciinema to gif converter)
+RUN cargo install --git https://github.com/asciinema/agg
 
-# Copy the built binary (as lts-bin since lts.zsh function wraps it)
+# Copy the built binary
 COPY --from=builder /app/lts /usr/local/bin/lts-bin
+
+# Create a wrapper script for lts that works in VHS/demo context
+RUN echo '#!/bin/sh' > /usr/local/bin/lts && \
+    echo 'lts-bin "$@"' >> /usr/local/bin/lts && \
+    chmod +x /usr/local/bin/lts
 
 # Copy the zsh script
 RUN mkdir -p /usr/local/share/lts
 COPY ./scripts/lts.zsh /usr/local/share/lts/lts.zsh
 
-# Set up zsh to source lts.zsh at startup
+# Set up zsh to source lts.zsh at startup for interactive use
 RUN echo 'source /usr/local/share/lts/lts.zsh' >> /root/.zshrc
 
 # Create working directory
 WORKDIR /demo
 
 # Copy demo files
-COPY demo.tape .
+COPY demo.exp .
+COPY record-demo.sh .
 COPY .lts.json.demo /root/.lts.json
+
+# Make scripts executable
+RUN chmod +x /demo/demo.exp /demo/record-demo.sh
 
 CMD ["zsh"]

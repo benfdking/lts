@@ -55,4 +55,6 @@ Type "# Convert natural language to shell commands using AI" Sleep 1s Enter
 # Demo: List PDF files
 Type "lts list all pdf files in the current directory" Sleep 500ms Enter
 
+Sleep 2s
+
 Type "# Works with any shell command!" Sleep 1s Enter

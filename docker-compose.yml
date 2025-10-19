@@ -10,4 +10,4 @@ services:
       - ./demo-output:/demo/output
     environment:
       - VHS_NO_SANDBOX=1
-    command: sh -c "vhs demo.tape && cp -f demo.gif output/"
+    command: sh -c "/demo/record-demo.sh"
