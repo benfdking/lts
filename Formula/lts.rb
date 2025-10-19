@@ -5,13 +5,13 @@
 class Lts < Formula
   desc "Convert natural language to shell commands using AI"
   homepage "https://github.com/benfdking/lts"
-  version "0.0.16"
+  version "0.1.0"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.16/lts_Darwin_x86_64.tar.gz"
-      sha256 "bd0736131b3457ca483799c965821adf218586619a35edebd74c9ae8716e9e9f"
+      url "https://github.com/benfdking/lts/releases/download/v0.1.0/lts_Darwin_x86_64.tar.gz"
+      sha256 "b59ec940cef61ba67448c1102dee56d59107e394ac7c8b805176c81f0f3dbd72"
 
       def install
         bin.install "lts" => "lts-bin"
@@ -19,8 +19,8 @@ class Lts < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.16/lts_Darwin_arm64.tar.gz"
-      sha256 "1e8ea6289bfee2f5dcfbad147b295959fc169fada9c429633ed2928abef9f2da"
+      url "https://github.com/benfdking/lts/releases/download/v0.1.0/lts_Darwin_arm64.tar.gz"
+      sha256 "3a4dbe77bd569ca5ee19c8d99ab02ea25e3fbb78d4364511a00de0c36cb11d1b"
 
       def install
         bin.install "lts" => "lts-bin"
@@ -31,43 +31,20 @@ class Lts < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.16/lts_Linux_x86_64.tar.gz"
-      sha256 "7eccc96695539593c9e7506be1c1bfad4f3320303f8149f7c9fdd05c004bc040"
+      url "https://github.com/benfdking/lts/releases/download/v0.1.0/lts_Linux_x86_64.tar.gz"
+      sha256 "835a6e9d56c9c21cd61f5424a8c589fc71f289b4f471a3feba9b20d0ad5b6f63"
       def install
         bin.install "lts" => "lts-bin"
         (pkgshare/"zsh").install "scripts/lts.zsh"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/benfdking/lts/releases/download/v0.0.16/lts_Linux_arm64.tar.gz"
-      sha256 "0f07911abfbd177db4c8b9d4428add967302d26fe17a070dd7fd24b17d5de574"
+      url "https://github.com/benfdking/lts/releases/download/v0.1.0/lts_Linux_arm64.tar.gz"
+      sha256 "45869c691e766e15445eddf0b9b91eb9c27478e97cc6f462eed9c3bdd1347b9c"
       def install
         bin.install "lts" => "lts-bin"
         (pkgshare/"zsh").install "scripts/lts.zsh"
       end
     end
-  end
-
-  def caveats
-    <<~EOS
-      LTS has been installed with interactive command execution enabled by default.
-
-      To enable zsh integration (function + keybinding), run:
-
-        echo 'source "#{opt_pkgshare}/zsh/lts.zsh"' >> ~/.zshrc
-
-      Then restart your shell or run:
-        source ~/.zshrc
-
-      Usage:
-        - `lts <natural language>` to insert a command at the prompt
-        - Press Ctrl-X then L to transform the current line
-
-      For scripting or piping, use the --raw flag:
-        lts --raw list all pdf files
-
-      To configure your LLM provider:
-        lts init
-    EOS
   end
 end
