@@ -52,10 +52,9 @@ class Lts < Formula
     <<~EOS
       LTS has been installed with interactive command execution enabled by default.
 
-      To enable zsh integration (function + keybinding), add to your ~/.zshrc:
+      To enable zsh integration (function + keybinding), run:
 
-        # LTS zsh integration
-        source "#{opt_pkgshare}/zsh/lts.zsh"
+        echo 'source "#{opt_pkgshare}/zsh/lts.zsh"' >> ~/.zshrc
 
       Then restart your shell or run:
         source ~/.zshrc
