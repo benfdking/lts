@@ -33,22 +33,6 @@ Interactive command execution is enabled by default with Homebrew - just run `lt
 
 Run `lts init` for interactive setup, or create a configuration file at `~/.lts.json` manually:
 
-### Claude Code (Recommended)
-
-Uses the Claude Code CLI with automatic authentication from your Claude login.
-
-```json
-{
-  "llm_provider": "claude-code"
-}
-```
-
-First, install Claude Code and login:
-```bash
-npm install -g @anthropic-ai/claude-code
-claude login
-```
-
 ### Anthropic API
 
 Uses the Anthropic API directly with an API key.
