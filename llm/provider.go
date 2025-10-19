@@ -17,7 +17,11 @@ func NewProvider(cfg *config.Config) (Provider, error) {
 	case "anthropic":
 		return &AnthropicProvider{}, nil
 	case "openai":
-		return &OpenAIProvider{}, nil
+		provider := &OpenAIProvider{}
+		if cfg.OpenAI != nil {
+			provider.Model = cfg.OpenAI.Model
+		}
+		return provider, nil
 	case "ollama":
 		provider := &OllamaProvider{}
 		if cfg.Ollama != nil {

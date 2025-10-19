@@ -41,7 +41,7 @@ func (o *OpenAIProvider) Translate(prompt string) (string, error) {
 
 	model := o.Model
 	if model == "" {
-		model = "gpt-4"
+		model = "gpt-5-nano"
 	}
 
 	reqBody := openaiRequest{
