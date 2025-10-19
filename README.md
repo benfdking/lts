@@ -1,5 +1,7 @@
 # LTS - Language To Shell
 
+![Demo](demo.gif)
+
 A simple CLI tool that converts natural language into shell commands using AI like command k in Cursor. 
 
 ## Usage
