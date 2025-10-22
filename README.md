@@ -23,6 +23,7 @@ $ git add . && git commit -m "finished"
 ### Homebrew (macOS/Linux)
 
 ```bash
+brew tap benfdking/lts https://github.com/benfdking/lts
 brew install benfdking/lts/lts
 echo 'source "$(brew --prefix)/share/lts/zsh/lts.zsh"' >> ~/.zshrc
 source ~/.zshrc
