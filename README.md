@@ -27,14 +27,24 @@ brew tap benfdking/lts https://github.com/benfdking/lts
 brew install benfdking/lts/lts
 echo 'source "$(brew --prefix)/share/lts/zsh/lts.zsh"' >> ~/.zshrc
 source ~/.zshrc
+lts init
 ```
 
 Interactive command execution is enabled by default with Homebrew - just run `lts` and start using it!
 
-
 ## Configuration
 
 Run `lts init` for interactive setup, or create a configuration file at `~/.lts.json` manually:
+
+### Claude Code 
+
+Use your Claude Code setup under the hood.
+
+```json
+{
+  "llm_provider": "claude-code"
+}
+```
 
 ### Anthropic API
 
