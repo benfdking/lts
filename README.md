@@ -7,9 +7,10 @@ A simple CLI tool that converts natural language into shell commands using AI li
 ## Usage
 
 When interactive mode is enabled, `lts` will:
+
 1. Generate the command using AI
-2. Print the generated command
-3. Run the command automatically
+2. Print the generated command into the next shell line
+3. Run the command by hitting enter
 
 Simply describe what you want to do in natural language and the command appears in your next shell:
 
